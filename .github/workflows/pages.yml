@@ -1,0 +1,43 @@
+name: pages
+
+# The site is plain HTML/CSS/JS in site/, so deploying it is just uploading
+# the folder. No build step, no node_modules, no framework.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - "docs/dashboard.png"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use the real dashboard render as the social card
+        run: |
+          if [ -f docs/dashboard.png ]; then cp docs/dashboard.png site/assets/og-card.png; fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

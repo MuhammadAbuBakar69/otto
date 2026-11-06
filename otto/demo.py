@@ -49,13 +49,13 @@ DEMO = [
         },
     },
     {
-        "name": "Bookwell Bistro",
-        "domain": "bookwellbistro.test",
-        "email": "team@bookwellbistro.test",
+        "name": "Terrace Bistro",
+        "domain": "terracebistro.test",
+        "email": "team@terracebistro.test",
         "city": "Lahore",
         "category": "restaurant",
         "facts": {
-            "title": "Bookwell Bistro",
+            "title": "Terrace Bistro",
             "description": "A twenty seat room, a short menu that changes weekly, walk-ins welcome.",
             "headings": ["This week's menu"],
             "paragraphs": ["We take reservations by phone only, from eleven in the morning."],

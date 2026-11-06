@@ -50,3 +50,13 @@ jobs:
         run: docker build -t otto:ci .
       - name: Run the demo inside the container
         run: docker run --rm otto:ci demo --reset
+
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Browser engine tests (includes parity with Python)
+        run: node --test tests/site/

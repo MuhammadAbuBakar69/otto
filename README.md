@@ -6,6 +6,13 @@
 \___/ \__|_| \___|   always be closing, never be billed
 ```
 
+**[Live site](https://muhammadabubakar69.github.io/otto/)** ·
+[CI](https://github.com/MuhammadAbuBakar69/otto/actions/workflows/ci.yml) ·
+[License: MIT](https://github.com/MuhammadAbuBakar69/otto/blob/main/LICENSE)
+
+The site has a **working demo**: it runs a JavaScript port of the pipeline in your
+browser, and a test asserts its drafts are byte-identical to the Python ones.
+
 **An autonomous outreach agent with a $0 model bill.** No API keys, no
 subscriptions, no accounts, no free trial that expires.
 
@@ -160,6 +167,15 @@ otto/
 ├── demo.py        six invented businesses, zero network
 └── cli.py         init, doctor, status, demo, discover, profile,
                    write, send, run, dashboard, reset
+
+site/              the landing page and the in-browser demo
+├── index.html     one page, semantic, no framework
+├── assets/styles.css
+├── assets/engine.js   the pipeline ported to plain JS (used by the demo)
+├── assets/demo.js     the demo UI
+└── assets/site.js     header, copy buttons, the small stuff
+
+tests/site/        node --test: the JS engine, including Python parity
 ```
 
 About 2,000 lines of standard-library Python, dashboard page included. Every
@@ -206,6 +222,7 @@ python3 -m otto reset --yes       delete the local database
 
 ```bash
 python3 -m unittest discover -s tests -v     # 31 tests, no network
+node --test tests/site/                      # 9 tests, includes parity
 ```
 
 Or with the Makefile:
