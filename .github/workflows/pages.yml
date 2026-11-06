@@ -1,7 +1,11 @@
 name: pages
 
-# The site is plain HTML/CSS/JS in site/, so deploying it is just uploading
-# the folder. No build step, no node_modules, no framework.
+# Deploys site/ to the gh-pages branch on every push.
+#
+# Why a branch and not the Actions deployment API: this repository's Pages
+# deployment sat in "deployment_queued" until it timed out, twice. The branch
+# publish path is older and far more reliable, and it still needs nothing but
+# git. Pages serves the gh-pages branch root, so this folder IS the website.
 on:
   push:
     branches: [main]
@@ -12,32 +16,36 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use the real dashboard render as the social card
+
+      - name: Stage the site
         run: |
-          if [ -f docs/dashboard.png ]; then cp docs/dashboard.png site/assets/og-card.png; fi
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          mkdir -p /tmp/publish
+          cp -R site/. /tmp/publish/
+          # the real dashboard render doubles as the social card
+          if [ -f docs/dashboard.png ]; then
+            cp docs/dashboard.png /tmp/publish/assets/og-card.png
+          fi
+          # no Jekyll: everything here is already static
+          touch /tmp/publish/.nojekyll
+
+      - name: Push to gh-pages
+        run: |
+          cd /tmp/publish
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "publish ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          echo "published to gh-pages"
