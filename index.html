@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>otto — the outreach agent with a $0 model bill</title>
+<meta name="description" content="Otto is an open-source autonomous outreach agent that runs on your machine with no API keys and no subscriptions. Standard library only, MIT licensed, human approved.">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="otto — the outreach agent with a $0 model bill">
+<meta property="og:description" content="Finds businesses, reads their site, drafts the email, reads the reply. No keys, no subscriptions, no vendor.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://muhammadabubakar69.github.io/otto/assets/og-card.png">
+<link rel="canonical" href="https://muhammadabubakar69.github.io/otto/">
+<meta property="og:url" content="https://muhammadabubakar69.github.io/otto/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="otto, home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      otto
+    </a>
+    <nav class="nav" id="nav" aria-label="Primary">
+      <a href="#free">Why it is free</a>
+      <a href="#demo">Live demo</a>
+      <a href="#how">How it works</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost" href="https://github.com/MuhammadAbuBakar69/otto" rel="noopener">GitHub</a>
+      <a class="btn btn-primary" href="#demo">Run the demo</a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- hero -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span> Open source · MIT · no API keys</span>
+      <h1>The outreach agent with a <em>$0 model bill</em>.</h1>
+      <p class="hero-sub">
+        Otto finds businesses worth talking to, reads their website, writes the email,
+        sends it from your own mailbox and drafts the replies. It runs on your machine,
+        in a loop, with nothing to subscribe to.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-peach" href="#demo">Try the live demo</a>
+        <a class="btn" href="https://github.com/MuhammadAbuBakar69/otto" rel="noopener">Read the source</a>
+      </div>
+      <div class="cmd">
+        <span class="cmd-prompt" aria-hidden="true">$</span>
+        <code id="hero-cmd">git clone https://github.com/MuhammadAbuBakar69/otto</code>
+        <button class="btn btn-sm" data-copy="#hero-cmd">Copy</button>
+      </div>
+      <div class="hero-meta">
+        <span><i class="tick" aria-hidden="true">✓</i> Zero dependencies</span>
+        <span><i class="tick" aria-hidden="true">✓</i> Dry run by default</span>
+        <span><i class="tick" aria-hidden="true">✓</i> Nothing sends without you</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- cost -->
+  <section id="free">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Why it is free</span>
+        <h2>Harvey proved the shape. This one drops the subscription.</h2>
+        <p>
+          Every autonomous agent bills you per token, so every autonomous agent is built
+          to think less. Otto takes the other exit: the reasoning is optional, the
+          plumbing is plain Python, and the whole loop runs on your own hardware.
+        </p>
+      </div>
+      <div class="grid-3">
+        <article class="card card-tint">
+          <div class="card-icon" aria-hidden="true">A</div>
+          <h3>Writing</h3>
+          <p>
+            Deterministic templates that quote a real line from the prospect's site. If you
+            want a model, point it at Ollama on your own disk. If that model is down or
+            rambles, Otto falls back to the template instead of blocking.
+          </p>
+          <div class="price-line"><span>per email</span><b>$0.00</b></div>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">B</div>
+          <h3>Deciding</h3>
+          <p>
+            What happens next is four SQL counts, not a model call: replies, approved
+            drafts, ready prospects, unread sites. Asking a model "what should I do?"
+            spends money to answer a question the database already answered.
+          </p>
+          <div class="price-line"><span>per decision</span><b>$0.00</b></div>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">C</div>
+          <h3>Finding and reading</h3>
+          <p>
+            A CSV you write, or OpenStreetMap through Overpass. Neither wants a key. Reading
+            a company site is three HTTP requests and some regex, not a scraping subscription.
+          </p>
+          <div class="price-line"><span>per prospect</span><b>$0.00</b></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- live demo -->
+  <section id="demo" class="demo-section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Live demo</span>
+        <h2>The real logic, running in this tab.</h2>
+        <p>
+          This is not a video and not a mock. The panels below run a JavaScript port of
+          <code>pipeline.py</code>, <code>write.py</code> and <code>replies.py</code>, and the
+          test suite checks that its drafts are byte-identical to the Python ones. Approve
+          something and watch the cycle pick it up.
+        </p>
+      </div>
+
+      <div class="demo-shell">
+        <div class="demo-chrome">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="demo-url">127.0.0.1:5555</div>
+          <div class="demo-badge" id="mode-badge">dry_run</div>
+        </div>
+
+        <div class="demo-body">
+          <div class="demo-top">
+            <div class="demo-title">otto <b>▸</b> outbox</div>
+            <div class="demo-actions">
+              <button class="btn btn-sm" id="run-cycle">Run one cycle</button>
+              <button class="btn btn-sm btn-ghost" id="reset-demo">Reset demo</button>
+            </div>
+          </div>
+
+          <div class="stats" role="group" aria-label="Pipeline counts">
+            <div class="stat"><span>prospects</span><strong data-stat="prospects">0</strong></div>
+            <div class="stat"><span>to profile</span><strong data-stat="unprofiled">0</strong></div>
+            <div class="stat"><span>drafts</span><strong data-stat="awaiting_approval">0</strong></div>
+            <div class="stat"><span>approved</span><strong data-stat="approved">0</strong></div>
+            <div class="stat is-live"><span>decision</span><strong data-stat="decision">idle</strong></div>
+          </div>
+
+          <div class="demo-tabs" role="tablist" aria-label="Demo views">
+            <button class="demo-tab" role="tab" aria-selected="true" data-tab="outbox" id="tab-outbox">
+              Outbox <span class="chip" data-chip="draft">0</span>
+            </button>
+            <button class="demo-tab" role="tab" aria-selected="false" data-tab="approved" id="tab-approved">
+              Approved <span class="chip" data-chip="approved">0</span>
+            </button>
+            <button class="demo-tab" role="tab" aria-selected="false" data-tab="sent" id="tab-sent">
+              Sent <span class="chip" data-chip="sent">0</span>
+            </button>
+            <button class="demo-tab" role="tab" aria-selected="false" data-tab="replies" id="tab-replies">
+              Conversations <span class="chip" data-chip="replies">0</span>
+            </button>
+            <button class="demo-tab" role="tab" aria-selected="false" data-tab="log" id="tab-log">
+              Log
+            </button>
+          </div>
+
+          <div class="demo-panel" id="demo-panel" role="tabpanel" aria-labelledby="tab-outbox"></div>
+
+          <div class="demo-note">
+            <b>Note</b>
+            <span>
+              This demo never leaves your browser: delivery is a dry run and nothing is sent.
+              Fetching a real website needs the CLI, because browsers block cross-origin
+              requests. The two prospects marked <em>not read yet</em> have a captured
+              snapshot standing in for that step.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- how -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How it works</span>
+        <h2>Four commands, then it runs itself.</h2>
+        <p>Python 3.9 or newer. No install step, because there is nothing to install.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">01</div>
+          <h3>Name your product</h3>
+          <p>One JSON file holds your pitch, your signature and your postal address. Secrets stay in .env.</p>
+          <code>python3 -m otto init</code>
+        </article>
+        <article class="step">
+          <div class="step-num">02</div>
+          <h3>Find prospects</h3>
+          <p>A CSV you write, or a city and a category. OpenStreetMap needs no account and no key.</p>
+          <code>otto discover --source osm</code>
+        </article>
+        <article class="step">
+          <div class="step-num">03</div>
+          <h3>Let it profile</h3>
+          <p>Three requests per company, then structured facts: title, description, headings, contact address.</p>
+          <code>otto profile --limit 10</code>
+        </article>
+        <article class="step">
+          <div class="step-num">04</div>
+          <h3>Approve and run</h3>
+          <p>Drafts wait in the local outbox. Nothing sends until you press approve, then the loop keeps going.</p>
+          <code>otto dashboard &amp;&amp; otto run</code>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- priority + terminal -->
+  <section>
+    <div class="wrap split">
+      <div class="panel">
+        <div class="panel-head">
+          <h3>The decision order</h3>
+          <span>pipeline.decide()</span>
+        </div>
+        <ol class="priority" id="priority-list">
+          <li data-priority="handle_replies">
+            <span class="rank">01</span>
+            <span><span class="what">handle_replies</span><span class="why">A reply is waiting. Opt-outs jump the queue.</span></span>
+            <span class="tag">replies</span>
+          </li>
+          <li data-priority="send">
+            <span class="rank">02</span>
+            <span><span class="what">send</span><span class="why">You approved something. It goes now, inside the daily cap.</span></span>
+            <span class="tag">outbox</span>
+          </li>
+          <li data-priority="write">
+            <span class="rank">03</span>
+            <span><span class="what">write</span><span class="why">A profiled prospect has no draft yet.</span></span>
+            <span class="tag">writer</span>
+          </li>
+          <li data-priority="profile">
+            <span class="rank">04</span>
+            <span><span class="what">profile</span><span class="why">A prospect exists but its site has not been read.</span></span>
+            <span class="tag">reader</span>
+          </li>
+          <li data-priority="idle">
+            <span class="rank">05</span>
+            <span><span class="what">idle</span><span class="why">Nothing to do, so it sleeps instead of spending.</span></span>
+            <span class="tag">sleep</span>
+          </li>
+        </ol>
+      </div>
+
+      <div>
+        <div class="terminal" aria-label="Terminal output example">
+<div><span class="dim">$</span> python3 -m otto run</div>
+<div class="dim">==============================================================</div>
+<div>Otto is online. Model: <span class="peach">none (built-in templates)</span>.</div>
+<div>Delivery: <span class="peach">dry_run</span>.</div>
+<div class="dim">==============================================================</div>
+<div>&nbsp;</div>
+<div class="dim">[09:15:00] cycle</div>
+<div>&nbsp;&nbsp;handler&nbsp; -&gt; 1 answer drafted for approval</div>
+<div>&nbsp;&nbsp;outbox&nbsp;&nbsp; -&gt; 0 sent, 0 skipped (20/day cap)</div>
+<div>&nbsp;&nbsp;writer&nbsp;&nbsp; -&gt; 3 drafts waiting for you</div>
+<div>&nbsp;&nbsp;reader&nbsp;&nbsp; -&gt; 5 sites read, <span class="ok">$0</span></div>
+<div>&nbsp;&nbsp;decision -&gt; handle_replies</div>
+<div>&nbsp;&nbsp;sleeping 900s. Ctrl-C to stop.</div>
+        </div>
+        <div class="card" style="margin-top:18px">
+          <h3>Two things it never does</h3>
+          <p>
+            It does not guess an email address, and it does not send to someone who opted out.
+            Missing address means the draft is skipped with a reason, not a bounce.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- guardrails -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Guardrails</span>
+        <h2>Boring on purpose.</h2>
+        <p>
+          Cold outreach is only defensible if it is small, honest and easy to stop. These are
+          in the code, not in a blog post.
+        </p>
+      </div>
+      <div class="grid-3">
+        <article class="card">
+          <h3>One email, one ask</h3>
+          <p>
+            No sequences, no drip campaigns, no "just bumping this". A prospect gets a second
+            message only after they reply to the first.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Opt-outs are permanent</h3>
+          <p>
+            The word unsubscribe in a reply sets the prospect to opted out, cancels anything
+            queued, and blocks every future send before it reaches the mail server.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Daily caps, and a legal footer</h3>
+          <p>
+            Drafting and sending have separate daily limits. Otto refuses to send at all
+            without a postal address and an opt-out line, because commercial email needs both.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section id="questions">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="kicker">Questions</span>
+        <h2>The things you would ask next.</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Is it really free, or free until a limit?</summary>
+          <div class="answer">
+            <p>
+              Really free. Otto is MIT licensed and runs locally. There is no hosted tier, no
+              metered API and no account. The only cost that could exist is your own mail
+              provider, and a Gmail app password on a spare address costs nothing.
+            </p>
+            <p>
+              The trade-off is real: you are the one running it. There is no dashboard in the
+              cloud, no team seats and nobody to call when it breaks.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>What happens without a language model?</summary>
+          <div class="answer">
+            <p>
+              You get the template engine, which is the default. It quotes a real sentence from
+              the prospect's site and stays under 130 words. It is less varied than a model and
+              more predictable, which is usually the right trade for a first email.
+            </p>
+            <p>
+              If you do have Ollama running, set <code>OTTO_MODEL_PROVIDER=ollama</code>. Same
+              code path, local weights, still no bill.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>How is this different from Harvey?</summary>
+          <div class="answer">
+            <p>
+              Harvey is the reference implementation and it is good: deterministic decisions,
+              an outbox, a skills library, a local dashboard. It runs on your Claude or Codex
+              subscription, which means a recurring cost and an API-shaped dependency.
+            </p>
+            <p>
+              Otto keeps the architecture and removes the subscription. Templates instead of
+              prompts by default, Ollama if you want a model, SQLite instead of a service, and
+              the Python standard library instead of a requirements file.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>Will this get my domain blacklisted?</summary>
+          <div class="answer">
+            <p>
+              Not by itself, but it can if you point it at a list of five thousand addresses.
+              Otto is built for tens of prospects, on a spare domain, with a human reading every
+              message before it leaves. That is the version of this that works.
+            </p>
+            <p>
+              Warm a new mailbox before you send from it, keep volumes low, and honour opt-outs
+              the same day. The repo documents the settings that matter.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>Can I use it for something other than sales?</summary>
+          <div class="answer">
+            <p>
+              Yes, and people already do: recruiting, partnership intros, asking local
+              businesses about a service they clearly need. The pipeline does not care what the
+              product is, only that the pitch lives in <code>otto.json</code>.
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>What is actually tested?</summary>
+          <div class="answer">
+            <p>
+              31 Python tests with no network access, covering the decision order, the template,
+              the reply classifier, opt-outs, caps and the delivery gate. Plus 9 JavaScript tests
+              for this site, one of which asserts that the browser drafts match the Python drafts
+              byte for byte.
+            </p>
+            <p>
+              CI runs the Python suite on 3.9 through 3.13, lints with ruff, builds the Docker
+              image, and deploys this page.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- cta -->
+  <section>
+    <div class="wrap">
+      <div class="cta-panel">
+        <h2>Start with six invented businesses.</h2>
+        <p>
+          The demo seeds a throwaway database so you can see the whole loop, outbox included,
+          before you point it at anything real.
+        </p>
+        <div class="cmd">
+          <span class="cmd-prompt" aria-hidden="true">$</span>
+          <code id="cta-cmd">python3 -m otto demo</code>
+          <button class="btn btn-sm" data-copy="#cta-cmd">Copy</button>
+        </div>
+        <div class="hero-cta" style="margin-top:22px">
+          <a class="btn btn-primary" href="https://github.com/MuhammadAbuBakar69/otto" rel="noopener">Clone on GitHub</a>
+          <a class="btn" href="#demo">Back to the demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span> otto</a>
+        <p>An autonomous outreach agent that runs on your machine. MIT licensed, built by Muhammad Abu-Bakar.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Project</h4>
+          <a href="https://github.com/MuhammadAbuBakar69/otto" rel="noopener">Source</a>
+          <a href="https://github.com/MuhammadAbuBakar69/otto/blob/main/README.md" rel="noopener">Documentation</a>
+          <a href="https://github.com/MuhammadAbuBakar69/otto/issues" rel="noopener">Issues</a>
+          <a href="https://github.com/MuhammadAbuBakar69/otto/blob/main/LICENSE" rel="noopener">License</a>
+        </div>
+        <div class="footer-col">
+          <h4>Elsewhere</h4>
+          <a href="https://withabubakar.netlify.app/" rel="noopener">Portfolio</a>
+          <a href="https://www.linkedin.com/in/mohamad-abubakar/" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/MuhammadAbuBakar69" rel="noopener">GitHub profile</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© <span id="year">2026</span> Muhammad Abu-Bakar. MIT.</span>
+      <span>Runs locally. Sends nothing without approval.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/engine.js"></script>
+<script src="assets/demo.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
