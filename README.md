@@ -137,6 +137,8 @@ Nothing sends without you. Drafts sit at `status = 'draft'` until you press
 approve in the dashboard (or `status` flips to `approved` in SQL). Approving is
 the only thing that lets a message into `send_approved()`.
 
+![Otto's dashboard: the outbox, the counters, the conversation log](docs/dashboard.png)
+
 Replies get the same treatment: Otto classifies them, drafts an answer, and waits.
 An opt-out does not wait for anything: it marks the prospect `opted_out`,
 cancels their pending drafts, and blocks every future send to them.
@@ -162,6 +164,16 @@ otto/
 
 About 2,000 lines of standard-library Python, dashboard page included. Every
 module is one idea and can be replaced without touching the rest.
+
+To regenerate that screenshot after changing the dashboard:
+
+```bash
+pip install playwright && python -m playwright install chromium
+python scripts/screenshot.py
+```
+
+That is the only install in the repo, and only for whoever is taking pictures.
+Otto itself never needs it.
 
 ## Commands
 
