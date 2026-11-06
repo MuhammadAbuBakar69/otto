@@ -1,0 +1,14 @@
+services:
+  otto:
+    build: .
+    image: otto:latest
+    command: ["dashboard"]
+    ports:
+      # loopback only: the dashboard never faces the network
+      - "127.0.0.1:5555:5555"
+    volumes:
+      - ./data:/app/data
+      - ./otto.json:/app/otto.json:ro
+    env_file:
+      - .env
+    restart: unless-stopped

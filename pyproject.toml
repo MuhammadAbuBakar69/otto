@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "otto-agent"
+version = "1.0.0"
+description = "An autonomous outreach agent with a $0 model bill. No API keys, no subscriptions, no accounts."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Muhammad Abu-Bakar", email = "md.bakar2006@gmail.com" }]
+keywords = ["ai-agent", "autonomous-agent", "outreach", "cold-email", "local-first", "sqlite"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["ruff>=0.6"]
+
+[project.scripts]
+otto = "otto.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/MuhammadAbuBakar69/otto"
+Source = "https://github.com/MuhammadAbuBakar69/otto"
+
+[tool.setuptools]
+packages = ["otto"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = ["E501"]

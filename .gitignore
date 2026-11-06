@@ -1,0 +1,13 @@
+# state, secrets, and installed noise
+data/
+*.db
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+.DS_Store
