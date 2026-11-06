@@ -54,10 +54,12 @@ def main() -> int:
 
     with sync_playwright() as play:
         browser = play.chromium.launch()
-        page = browser.new_page(viewport={"width": 1280, "height": 900}, device_scale_factor=2)
+        # A viewport shot, not a full-page one: the outbox with six drafts is
+        # 7000px tall and unreadable inline in a README.
+        page = browser.new_page(viewport={"width": 1440, "height": 1050}, device_scale_factor=2)
         page.goto(f"http://127.0.0.1:{port}/", wait_until="networkidle")
         page.wait_for_timeout(1200)
-        page.screenshot(path=str(output), full_page=True)
+        page.screenshot(path=str(output))
         browser.close()
 
     print(f"wrote {output}")
